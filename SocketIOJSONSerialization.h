@@ -22,7 +22,9 @@
 
 @interface SocketIOJSONSerialization : NSObject
 
++ (id) dataWithJSONObject:(id)object error:(NSError **)error;
 + (id) objectFromJSONData:(NSData *)data error:(NSError **)error;
 + (NSString *) JSONStringFromObject:(id)object error:(NSError **)error;
++ (id) objectFromJSONString:(NSString *)string error:(NSError **)error;
 
 @end

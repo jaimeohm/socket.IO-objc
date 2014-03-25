@@ -22,6 +22,8 @@
 #import "SocketIOPacket.h"
 #import "SocketIOJSONSerialization.h"
 
+#define DEBUG 1
+
 #ifdef DEBUG
 #define DEBUG_LOGS 1
 #define DEBUG_CERTIFICATE 1
@@ -90,6 +92,7 @@ NSString* const SocketIOException = @"SocketIOException";
         _ackCount = 0;
         _acks = [[NSMutableDictionary alloc] init];
         _returnAllDataFromAck = NO;
+        _useSecure = YES;
     }
     return self;
 }
@@ -429,7 +432,7 @@ NSString* const SocketIOException = @"SocketIOException";
                                       dispatch_get_main_queue());
     
     dispatch_source_set_timer(_timeout,
-                              dispatch_time(DISPATCH_TIME_NOW, _heartbeatTimeout * NSEC_PER_SEC),
+                              dispatch_time(DISPATCH_TIME_NOW, (int64_t)(_heartbeatTimeout * NSEC_PER_SEC)),
                               0,
                               0);
     
